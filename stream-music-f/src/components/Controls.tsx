@@ -21,7 +21,7 @@ export const Controls = () => {
     const [shuffleSongs, setShuffle] = useState(false);
 
     useEffect(() => {
-        sleep(100)
+        sleep(500)
         dispatch(setDuration(audio.duration))
 
         Axios.get("https://mp3-back.onrender.com/getSongs").then((response) =>{
@@ -30,6 +30,7 @@ export const Controls = () => {
         
         const interval = 
         setInterval(() => {
+                dispatch(setDuration(audio.duration))
                 dispatch(setProg(audio.currentTime))
         }, 250);
 
@@ -80,12 +81,13 @@ export const Controls = () => {
             audio.src=(name + '.mp3')
             dispatch(setQueue(song.queue.slice(1)))
         }
-        await sleep(100)
-        dispatch(setDuration(audio.duration))
+        
         
         audio.play();
         dispatch(playSong())
-       
+
+        await sleep(1200)
+        dispatch(setDuration(audio.duration))
     }
 
     async function prevSong() {
@@ -99,8 +101,7 @@ export const Controls = () => {
         dispatch(setSong(filtered[prev]))
 
         audio.src=(filtered[prev] + ".mp3")
-        await sleep(100)
-        dispatch(setDuration(audio.duration))
+
         
         } else {
             audio.currentTime = 0
@@ -108,6 +109,8 @@ export const Controls = () => {
 
         audio.play();
         dispatch(playSong())
+        await sleep(1200)
+        dispatch(setDuration(audio.duration))
         
     }
     
@@ -142,14 +145,15 @@ export const Controls = () => {
 
     async function startSong(songName: string, i: number) {
         audio.src=songName + ".mp3"
-        await sleep(100)
+        await sleep(2500)
         dispatch(setSong(songName))
         dispatch(setPos(i))
-        dispatch(setDuration(audio.duration))
+        
         dispatch(setProg(0))
         audio.currentTime = 0
         audio.play()
         dispatch(playSong())
+        dispatch(setDuration(audio.duration))
     }
 
     async function addToQueue(songName: string) {
@@ -215,7 +219,7 @@ export const Controls = () => {
         
         <div className="footer" id="timer">
         {formatTime(song.progress)} <Slider id="bar" value={song.progress/song.duration*100}/> 
-        {String(song.duration) === "NaN"? "00:00" : formatTime(song.duration)}
+        {formatTime(song.duration)}
         </div>
 
         <table className="footer" id="buttons">
