@@ -30,7 +30,7 @@ export const Controls = () => {
         
         const interval = 
         setInterval(() => {
-                dispatch(setDuration(audio.duration))
+                dispatch(setDuration(audio.duration));
                 dispatch(setProg(audio.currentTime))
         }, 250);
 
