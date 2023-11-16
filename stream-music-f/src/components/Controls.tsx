@@ -21,7 +21,7 @@ export const Controls = () => {
     const [shuffleSongs, setShuffle] = useState(false);
 
     useEffect(() => {
-        sleep(500)
+        sleep(5000)
         dispatch(setDuration(audio.duration))
 
         Axios.get("https://mp3-back.onrender.com/getSongs").then((response) =>{
@@ -86,7 +86,7 @@ export const Controls = () => {
         audio.play();
         dispatch(playSong())
 
-        await sleep(1200)
+        await sleep(5000)
         dispatch(setDuration(audio.duration))
     }
 
@@ -101,16 +101,17 @@ export const Controls = () => {
         dispatch(setSong(filtered[prev]))
 
         audio.src=(filtered[prev] + ".mp3")
+        await sleep(5000)
+        dispatch(setDuration(audio.duration))
 
-        
         } else {
             audio.currentTime = 0
         }
 
         audio.play();
         dispatch(playSong())
-        await sleep(1200)
-        dispatch(setDuration(audio.duration))
+        
+        
         
     }
     
