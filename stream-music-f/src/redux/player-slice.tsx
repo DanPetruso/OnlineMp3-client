@@ -16,7 +16,7 @@ type PlayerState = {
 
 const initialState = {
     value:{
-        song: "song",
+        song: "",
         filter: "",
         queue: [],
         position: 0,

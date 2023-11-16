@@ -24,7 +24,7 @@ export const Controls = () => {
         sleep(100)
         dispatch(setDuration(audio.duration))
 
-        Axios.get("http://localHost:3001/getSongs").then((response) =>{
+        Axios.get("https://mp3-back.onrender.com/getSongs").then((response) =>{
             setSongs(response.data)
         })
         
@@ -60,7 +60,7 @@ export const Controls = () => {
         dispatch(pauseSong())
 
         if (shuffleSongs) {
-            const next = Math.floor(Math.random() * (rows.length));
+            const next = Math.floor(Math.random() * (filtered.length));
 
             dispatch(setPos(next))
             dispatch(setSong(filtered[next]))
