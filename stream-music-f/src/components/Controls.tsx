@@ -123,7 +123,7 @@ export const Controls = () => {
             audio.currentTime = audio.currentTime + 15
             audio.play()
         } else {
-            nextSong()
+            //nextSong()
         }
         
     }
